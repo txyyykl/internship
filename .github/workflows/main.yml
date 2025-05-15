@@ -1,0 +1,18 @@
+name: Resume Validation
+
+on:
+  pull_request:
+    paths:
+      - "resume/**"
+
+jobs:
+  validate-resume:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Check Resume File
+      run: |
+        if [[ ! -f "resume/README.md" ]]; then
+          echo "未找到简历文件，请将您的简历提交至 resume/ 文件夹下。"
+          exit 1
+        fi
